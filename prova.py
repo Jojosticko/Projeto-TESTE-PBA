@@ -23,7 +23,7 @@ load_dotenv(dotenv_path="prompt.env")
 # 2. Pega as variáveis
 chave = os.getenv("GOOGLE_API_KEY")
 SENHA_ADMIN = os.getenv("SENHA_ADMIN")
-EMAIL_ADMIN = "administrador@gmail.com"
+EMAIL_ADMIN = "administrador.com"
 URL_PLATAFORMA = "http://localhost:5000"
 
 # 3. Validação
@@ -93,13 +93,21 @@ def enviar_ideia():
     if "REJEITADO" not in resultado:
         enviar_email_unico(ideia_id, nome, resultado, email_user)
         
-    return f"<h3>Processado!</h3><p>{resultado}</p><a href='/'>Voltar</a>"
+    return """
+            <div style="text-align: center; font-family: sans-serif; margin-top: 50px;">
+                <h3>Processado!</h3>
+                <p>Aguardar um retorno da sua ideia em Breve</p>
+                <a href='/'>Voltar</a>
+            </div>
+            """
     
 @app.route('/')
 def pagina_inicial():
     return f'''
         <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 30px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <h2 style="color: #333;">BPA Ventures - Portal de Triagem HZN</h2>
+           <div style="text-align: center;">
+                <h2 style="color: #333;">Sejam bem vindos! BPA Ventures</h2>
+            </div>
             <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 20px;">
             
             <form method="post" action="/enviar_ideia" enctype="multipart/form-data" style="line-height: 1.5;">
@@ -117,10 +125,6 @@ def pagina_inicial():
                 
                 <button type="submit" style="background:#007BFF; color:white; border:none; padding:12px 20px; cursor:pointer; font-weight:bold; width:100%; border-radius: 4px; font-size: 16px;">Submeter para Triagem Local</button>
             </form>
-            <br>
-            <p style="text-align: center; font-size: 14px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
-                🔒 Área do Admin: <a href="/historico" style="color: #007BFF; font-weight: bold; text-decoration: none;">Ver Histórico de Submissões</a>
-            </p>
         </div>
     '''
 
@@ -186,7 +190,6 @@ def logout():
 
 @app.route('/decisao/<ideia_id>/<status>')
 def decisao(ideia_id, status):
-    # 1. Atualiza o status
     if ideia_id in ideias_submetidas:
         ideias_submetidas[ideia_id]['status'] = status
         email_proponente = ideias_submetidas[ideia_id]['email']
