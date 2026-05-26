@@ -23,7 +23,7 @@ load_dotenv(dotenv_path="prompt.env")
 # 2. Pega as variáveis
 chave = os.getenv("GOOGLE_API_KEY")
 SENHA_ADMIN = os.getenv("SENHA_ADMIN")
-EMAIL_ADMIN = "meyejarold@gmail.com"
+EMAIL_ADMIN = "administrador@gmail.com"
 URL_PLATAFORMA = "http://localhost:5000"
 
 # 3. Validação
