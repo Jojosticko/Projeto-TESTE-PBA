@@ -1,5 +1,7 @@
 # Projeto de Submissão de Ideias - BPA Ventures
 
+senha admin=1234
+
 Este projeto é uma aplicação web desenvolvida para a coleta e avaliação de ideias, utilizando processamento de linguagem natural (IA) para análise qualitativa e um fluxo de gestão centralizado.
 
 ##  Tecnologias Utilizadas
